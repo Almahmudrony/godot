@@ -40,6 +40,9 @@
 #include "core/self_list.h"
 #include "servers/arvr/arvr_interface.h"
 
+
+#include "thirdparty/intelmoc/intelmoc.h"
+
 class VisualServerScene {
 public:
 	enum {
@@ -70,6 +73,10 @@ public:
 		Portal() { enabled=true; disable_distance=50; disable_color=Color(); connect_range=0.8; }
 	};
 #endif
+
+	/* INTELMOC API */
+
+	intelmoc *i_moc;
 
 	/* CAMERA API */
 

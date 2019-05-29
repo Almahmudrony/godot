@@ -33,6 +33,7 @@
 #include "visual_server_globals.h"
 #include "visual_server_raster.h"
 #include <new>
+#include "thirdparty/alrolib/rony.h"
 /* CAMERA API */
 
 RID VisualServerScene::camera_create() {
@@ -1880,12 +1881,33 @@ void VisualServerScene::_prepare_scene(const Transform p_cam_transform, const Ca
 	//removed, will replace with culling
 
 	/* STEP 4 - REMOVE FURTHER CULLED OBJECTS, ADD LIGHTS */
+	rony_main();
 
 	for (int i = 0; i < instance_cull_count; i++) {
 
 		Instance *ins = instance_cull_result[i];
 
 		bool keep = false;
+
+		/* INTELMOC TEST */
+		if (ins->base_type == VS::INSTANCE_MESH)
+		{
+			int sur_count = VSG::storage->mesh_get_surface_count(ins->base);
+			for (int c = 0; c < sur_count; c++)
+			{
+				VisualServer *vs = VisualServer::get_singleton();
+				Array vertex_array = vs->mesh_surface_get_arrays(ins->base, c);
+				//Variant vertex_variant = vertex_array[VisualServer::ARRAY_VERTEX];
+				PoolVector<Vector3> v3_pool = vertex_array[VisualServer::ARRAY_VERTEX];
+				printf("ArrayMesh Size: %d ", vertex_array.size());
+				printf("Vertex Size: %d\n", v3_pool.size() / 3);
+				for (int v = 0; v < v3_pool.size() / 3; v++) {
+					printf("V%d: X->%.3f, Y->%.3f, Z->%.3f\n", v, v3_pool.get(v).x, v3_pool.get(v).y, v3_pool.get(v).z);
+				}
+			}
+			printf("\n\n");
+		}
+		/* INTELMOC TEST */
 
 		if ((camera_layer_mask & ins->layer_mask) == 0) {
 
@@ -3524,6 +3546,8 @@ VisualServerScene::VisualServerScene() {
 
 	render_pass = 1;
 	singleton = this;
+
+	i_moc = new intelmoc();
 }
 
 VisualServerScene::~VisualServerScene() {
@@ -3537,4 +3561,5 @@ VisualServerScene::~VisualServerScene() {
 	memdelete(probe_bake_mutex);
 
 #endif
+	i_moc->~intelmoc();
 }
