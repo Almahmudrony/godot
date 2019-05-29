@@ -1881,7 +1881,18 @@ void VisualServerScene::_prepare_scene(const Transform p_cam_transform, const Ca
 	//removed, will replace with culling
 
 	/* STEP 4 - REMOVE FURTHER CULLED OBJECTS, ADD LIGHTS */
+
+	/* THE INTEL MOC CODE */
 	rony_main();
+	int width = 1920;
+	int height = 1080;
+	i_moc->moc->SetResolution(width, height); // Set full HD resolution
+
+	// Clear hierarchical depth buffer to far depth
+	i_moc->moc->ClearBuffer();// ClearDepthBuffer();float nearClipDist = 1.0f;
+	float nearClipDist = 1.0f;
+	i_moc->moc->SetNearClipPlane(nearClipDist); // Set near clipping dist (optional)
+	/* THE INTEL MOC CODE */
 
 	for (int i = 0; i < instance_cull_count; i++) {
 
