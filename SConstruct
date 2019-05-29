@@ -135,6 +135,7 @@ opts.Add(BoolVariable('no_editor_splash', "Don't use the custom splash screen fo
 opts.Add('system_certs_path', "Use this path as SSL certificates default for editor (for package maintainers)", '')
 
 # Thirdparty libraries
+opts.Add(BoolVariable('builtin_alrolib', "Use the built-in alrolib library", True))
 opts.Add(BoolVariable('builtin_bullet', "Use the built-in Bullet library", True))
 opts.Add(BoolVariable('builtin_certs', "Bundle default SSL certificates to be used if you don't specify an override in the project settings", True))
 opts.Add(BoolVariable('builtin_enet', "Use the built-in ENet library", True))
@@ -146,6 +147,7 @@ opts.Add(BoolVariable('builtin_libvorbis', "Use the built-in libvorbis library",
 opts.Add(BoolVariable('builtin_libvpx', "Use the built-in libvpx library", True))
 opts.Add(BoolVariable('builtin_libwebp', "Use the built-in libwebp library", True))
 opts.Add(BoolVariable('builtin_libwebsockets', "Use the built-in libwebsockets library", True))
+opts.Add(BoolVariable('builtin_intelmoc', "Use the built-in intelmoc library", True))
 opts.Add(BoolVariable('builtin_mbedtls', "Use the built-in mbedTLS library", True))
 opts.Add(BoolVariable('builtin_miniupnpc', "Use the built-in miniupnpc library", True))
 opts.Add(BoolVariable('builtin_opus', "Use the built-in Opus library", True))
