@@ -7,6 +7,9 @@ class intelmoc
 public:
 	MaskedOcclusionCulling *moc;
 	MaskedOcclusionCulling *getMoc();
+	/* TODO
+			void saveDepthBufferAsBPM();
+	*/
 	intelmoc();
 	~intelmoc();
 
