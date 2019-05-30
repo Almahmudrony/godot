@@ -1998,6 +1998,7 @@ void VisualServerScene::_prepare_scene(Camera *camera, float aspect, const Trans
 			if (ins->base_type == VS::INSTANCE_MESH) {
 				int sur_count = VSG::storage->mesh_get_surface_count(ins->base);
 				for (int c = 0; c < sur_count; c++) {
+					if (VSG::storage->mesh_surface_get_array(ins->base,c).size()!=0) {
 					VisualServer *vs = VisualServer::get_singleton();
 					Array vertex_array = vs->mesh_surface_get_arrays(ins->base, c);
 					//PoolByteArray index_array = vs->mesh_surface_get_index_array(ins->base, c);
@@ -2022,6 +2023,7 @@ void VisualServerScene::_prepare_scene(Camera *camera, float aspect, const Trans
 					//-->	//-->printf("V%d: X->%.3f, Y->%.3f, Z->%.3f\n", v, v3_pool.get(v).x, v3_pool.get(v).y, v3_pool.get(v).z);
 					//-->	glm::vec4 v1 = projectionMatrix * View * glm::vec4();
 					//-->}
+					}
 				}
 				//-->printf("\n\n");
 			}
